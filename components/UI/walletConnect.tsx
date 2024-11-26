@@ -34,6 +34,7 @@ const WalletConnect: FunctionComponent<WalletConnectProps> = ({
 
   const filterConnectors = (connectors: Connector[]) => {
     if (isInArgentMobileAppBrowser()) {
+      // Filter connectors and remove duplicates
       const uniqueConnectors = connectors
         .filter((connector) => connector.id === "argentMobile" || connector.id === "argentX")
         .reduce((map, connector) => map.set(connector.id, connector), new Map())
@@ -107,7 +108,7 @@ const WalletConnect: FunctionComponent<WalletConnectProps> = ({
                   <div className={styles.walletName}>
                     <p>
                       {needInstall(connector, isAvailable) ? "Install " : ""}
-                      {connector.id === "argentMobile" && isMobile || isInArgentMobileAppBrowser()
+                      {isInArgentMobileAppBrowser()
                         ? "Argent"
                         : getConnectorName(connector.id)}
                     </p>
